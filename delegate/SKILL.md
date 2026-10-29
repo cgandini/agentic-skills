@@ -91,6 +91,7 @@ Do it yourself only when one of these is literally true:
 - **The task needs the conversation** and it cannot be summarized in a paragraph. Rare — if you can explain it to the user, you can explain it to a subagent.
 - **The task is the judgment itself.** Architecture, ambiguity resolution, tradeoffs, anything where the user might need to be asked. Subagents cannot talk to the user.
 - **You could not verify the result.** If you cannot check it, you cannot delegate it.
+- **Applying an auditor's TRIVIAL fix.** The code is already written and reviewed; a brief would only relay it. See § Trivial-fix closure.
 
 "The brief would take as long as the work" is **not** on this list on its own. Writing the brief *is* the work — it is the part that needs you. If the brief is short because the task is simple, it costs nothing; if it is long because the task has traps, it was worth writing.
 
@@ -347,6 +348,28 @@ Defined here and nowhere else.
 
 **Fix loop:** when a report misses the bar, fix every 🔴 and 🟠, fix 🟡/💡 in files already touched, re-run Check 0, re-audit. **Maximum 3 loops** — after the third miss the design is wrong, not the patch. Re-plan, log it in the decisions file, reset the counter.
 
+### Trivial-fix closure — when the score is low but the fix is one line
+
+Severity measures **impact**; it says nothing about **effort**. A missing `await` on a write is 🔴 and a one-word fix. Re-auditing for that spends a full audit to review a diff the auditor already wrote. So, before entering the fix loop, sort every 🔴/🟠 by the auditor's `Fix size` field (see `references/audit.md`):
+
+**A finding is TRIVIAL only if all of these are literally true:**
+1. The auditor marked it `Fix size: TRIVIAL` **and** gave the exact before/after code.
+2. You apply that code as written. Any deviation — a different variable, an extra line, "while I'm here" — and it is no longer the code the auditor reviewed: not trivial.
+3. One file, one hunk, ≤ 5 changed lines, inside the lines the finding cites.
+4. It adds no branch, state, dependency, or change to a signature, export, schema, storage path or public contract.
+5. It is verifiable by a command: Check 0 plus the unit's acceptance, and — when it is cheap — a test that fails before the fix and passes after.
+
+**Not eligible, ever:** a Check 0 failure (the auditor stopped before the dimensions; nothing else has been audited yet) · a finding repeated 3+ times (that is a pervasive pattern — a hole in the brief, not a typo).
+
+**What you do with them:**
+- **All blockers are TRIVIAL →** apply them yourself (this is a narrow exception: no interpretation, the code is given), run the verification commands, and **close without a re-audit**. Recompute the score as *reported score + the points those findings cost*. If that meets the pass bar, the unit passed.
+- **Any blocker is NOT TRIVIAL →** normal fix loop. Apply the trivial ones first, so the re-audit sees them already fixed.
+- **Tier 2 →** trivial fixes are applied the same way, but since tier 2 cannot be waived, closure needs a **delta check** instead of a full re-audit: a fresh `TIER_WORKER` gets only the finding and the hunk, and answers two questions — *does this close it, does it introduce anything?* Short brief, short answer.
+
+A trivial closure **does not count** against the 3-loop limit. If a verification command fails after the fix, the finding was not trivial: revert to the normal fix loop.
+
+**Record it** in the delivery: each finding closed this way, the line changed, and the command that proved it. That is the evidence a re-audit would have produced.
+
 **Bump one tier** when the writer's Return flags decisions it made beyond the brief. Those are holes in *your* brief — and on your own brief you are the biased reviewer. A cold reader is the only one who catches a faithfully implemented wrong decision.
 
 Assign the tier **in the brief**, so the writer knows what it is being held to, and record it in the plan file.
@@ -362,7 +385,7 @@ Assign the tier **in the brief**, so the writer knows what it is being held to, 
 4. **Create a named worktree** per writer; fire the wave in the background. *(`worktrees.md`, `platforms.md`)*
 5. **Keep working** while it runs — next brief, next wave. *(`latency.md`)*
 6. **Verify** each result yourself; read the decisions and blast-radius items first. *(`verification.md`)*
-7. **Audit** at the assigned tier, through a fresh subagent: `subagent.md` + `audit.md` + the handoff — never the brief's decisions. *(`audit.md`)*
+7. **Audit** at the assigned tier, through a fresh subagent: `subagent.md` + `audit.md` + the handoff — never the brief's decisions. Blockers marked TRIVIAL close per § Trivial-fix closure, not by re-auditing. *(`audit.md`)*
 8. **Integrate**, merge, clean up the worktree.
 9. **Land** per `AUTO_LAND`. *(`landing.md`)*
 10. **Report** in your words — never a pasted subagent report.

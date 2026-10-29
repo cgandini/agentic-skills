@@ -100,7 +100,8 @@ Location: filename.ts, line 42 (or "multiple locations" with examples)
 Dimension: Architecture / Security / Robustness / ...
 Problem: One or two sentences — what is wrong and why it is dangerous.
 Fix: The minimum change required.
-Code Fix (if straightforward):
+Fix size: TRIVIAL / NOT TRIVIAL
+Code Fix (required if TRIVIAL, optional otherwise):
     // Before:
     // After:
 ```
@@ -108,6 +109,8 @@ Code Fix (if straightforward):
 #### 🟠 High-Risk Issues
 
 Same format, 🟠 badge.
+
+**Fix size — severity and effort are separate.** Rate severity by impact, never lowered because the fix is easy. Then mark `Fix size: TRIVIAL` only when the exact before/after you give is the whole fix: one file, one hunk, ≤ 5 lines, no new branch or state, no change to a signature, export, schema, storage path or dependency. Anything that needs judgment to apply is `NOT TRIVIAL`. A Check 0 failure and any pervasive pattern (3+ of a kind) are always `NOT TRIVIAL`. The orchestrator may close TRIVIAL findings without re-auditing you — so the Before/After must be correct as written, copied from the real lines.
 
 #### 🟡 Medium & 💡 Low Issues
 
