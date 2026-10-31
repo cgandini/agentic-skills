@@ -1,0 +1,25 @@
+{
+  "lang": "es",
+  "title": "Renata Olmos · links",
+  "description": "Los links de Renata Olmos, nutricionista. Ejemplo ficticio de la skill pagina-de-links.",
+  "themeColor": "#F2EEE4",
+  "noindex": true,
+  "fontsHref": "https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800&family=Nunito+Sans:wght@400;500&family=Caveat:wght@400&display=swap",
+  "fonts": { "titulo": "Fraunces", "texto": "Nunito Sans", "acento": "Caveat" },
+  "colors": {
+    "fondo": "#F2EEE4",
+    "superficie": "#FFFFFF",
+    "tinta": "#1F2A24",
+    "texto": "#3A453F",
+    "gris": "#5A6660",
+    "borde": "#E4E0D6",
+    "bordeFondo": "#D8D2C3",
+    "acento": "#2F855A",
+    "acentoTexto": "#276749",
+    "acentoSuave": "#9ADBB4",
+    "gradiente": "linear-gradient(135deg,#2F855A 0%,#276749 90%)",
+    "aroFoto": "linear-gradient(180deg,#9ADBB4,#2F855A)"
+  },
+  "grain": true,
+  "radius": 14
+}

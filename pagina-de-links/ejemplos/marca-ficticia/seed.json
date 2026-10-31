@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "profile": {
+    "photo": "https://example.com/fotos/renata.jpg",
+    "name": "Renata Olmos",
+    "role": "Nutricionista · Comer simple",
+    "phrase": "Comer bien no tiene que ser complicado.",
+    "highlight": "no tiene que ser complicado.",
+    "sub": "Planes reales para vidas reales, sin dietas extremas."
+  },
+  "blocks": [
+    {
+      "id": "consulta",
+      "type": "destacado",
+      "hidden": false,
+      "label": "Primera consulta",
+      "title": "Consulta de bienvenida",
+      "text": "50 minutos para ordenar tu alimentación y salir con un plan que puedas sostener en tu día a día.",
+      "button": { "text": "Reserva tu turno", "url": "https://example.com/reservas" }
+    },
+    {
+      "id": "boletin1",
+      "type": "tarjeta",
+      "hidden": false,
+      "label": "Newsletter",
+      "title": "Comer bien sin culpa",
+      "highlight": "sin culpa",
+      "text": "Una receta simple y una idea por semana. Llega los domingos.",
+      "button": { "text": "Quiero recibirlo", "url": "https://example.com/boletin", "icon": "mail" }
+    },
+    {
+      "id": "podcast1",
+      "type": "fila",
+      "hidden": false,
+      "icon": "headphones",
+      "title": "Podcast Mesa de lunes",
+      "text": "Charlas cortas para empezar la semana.",
+      "url": "https://example.com/podcast",
+      "verified": false,
+      "style": "solido"
+    },
+    {
+      "id": "taller01",
+      "type": "fila",
+      "hidden": false,
+      "icon": "calendar",
+      "title": "Talleres de cocina en vivo",
+      "text": "Grupos chicos, una vez al mes.",
+      "url": "https://example.com/talleres",
+      "verified": false,
+      "style": "borde"
+    },
+    {
+      "id": "guias001",
+      "type": "libros",
+      "hidden": false,
+      "label": "Guías gratis",
+      "groups": [
+        {
+          "title": "Para empezar",
+          "layout": "destacado",
+          "items": [
+            {
+              "title": "Súper sin dudas",
+              "cover": "https://example.com/portadas/super.jpg",
+              "url": "https://example.com/guias/super",
+              "linkText": "Descargar la guía"
+            }
+          ]
+        }
+      ],
+      "more": { "text": "Ver todas las guías", "url": "https://example.com/guias" }
+    },
+    {
+      "id": "redes001",
+      "type": "redes",
+      "hidden": false,
+      "items": [
+        { "network": "instagram", "url": "https://example.com/renata-instagram" },
+        { "network": "youtube", "url": "https://example.com/renata-youtube" },
+        { "network": "email", "url": "mailto:hola@example.com" }
+      ]
+    }
+  ],
+  "footer": "Hecha con la plantilla gratis de imagineAI"
+}
