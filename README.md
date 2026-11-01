@@ -3,16 +3,25 @@
 **By Carolina L. Gandini, PhD** — Co-Founder @ [Imagine AI](https://imagineai.space) & Founder @ Padeler  
 [LinkedIn](https://www.linkedin.com/in/carolina-gandini/) · [Skills & Recursos (`imagineai.space/recursos/`)](https://imagineai.space/recursos/)
 
-A collection of production-tested, deterministic agentic skills, orchestration patterns, and workflows for **Claude Code**, **Antigravity**, and **ChatGPT / Codex**.
+A collection of production-tested, deterministic agentic skills, orchestration patterns, and workflows for **Claude Code**, **Antigravity**, **Cursor**, **VS Code**, and **ChatGPT / Codex**.
 
 ---
 
-## Skills Catalog
+## EN · Skills Catalog
 
 | Skill | Category | Description | Specification & Guides |
 |---|---|---|---|
 | **`delegate`** | Orchestration | Judgment vs. Execution pattern: frontier model keeps context lean; cost-effective models execute in parallel worktrees. | [Interactive Guide](https://imagineai.space/recursos/delegate/) · [`SKILL.md`](./delegate/SKILL.md) |
-| **`pagina-de-links`** | Personal Brand & Web | Step-by-step guidance to launch a branded link-in-bio page + mobile `/admin/` panel on Cloudflare Pages + D1 for USD 0/month. | [Interactive Guide](https://imagineai.space/recursos/pagina-de-links/) · [Template Repo](https://github.com/cgandini/tu-pagina-de-links) · [`SKILL.md`](./pagina-de-links/SKILL.md) |
+| **`personal-web`** | Personal Brand & Web | Step-by-step guidance to launch a personal brand web + mobile `/admin/` panel on Cloudflare Pages + D1 for USD 0/month. | [Interactive Guide](https://imagineai.space/recursos/personal-web/) · [Template Repo](https://github.com/cgandini/personal-web) · [`SKILL.md`](./personal-web/SKILL.md) |
+
+---
+
+## ES · Catálogo de Skills
+
+| Skill | Categoría | Descripción | Especificación y Guías |
+|---|---|---|---|
+| **`delegate`** | Orquestación | Patrón Juicio vs. Ejecución: el modelo más potente mantiene el contexto limpio; modelos económicos ejecutan en worktrees paralelos. | [Guía Interactiva](https://imagineai.space/recursos/delegate/) · [`SKILL.md`](./delegate/SKILL.md) |
+| **`personal-web`** | Marca Personal y Web | Guía paso a paso para lanzar tu web personal con tu identidad y panel móvil `/admin/` en Cloudflare Pages + D1 por USD 0/mes. | [Guía Interactiva](https://imagineai.space/recursos/personal-web/) · [Plantilla en GitHub](https://github.com/cgandini/personal-web) · [`SKILL.md`](./personal-web/SKILL.md) |
 
 ---
 
@@ -101,55 +110,70 @@ curl -sO https://imagineai.space/recursos/delegate/SKILL.md
 
 ---
 
-## 2. `pagina-de-links` — Branded Link-in-Bio & Mobile Admin Panel
+## 2. `personal-web` — Branded Personal Web & Mobile Admin Panel
 
-### EN · Overview & Problem
+### EN · Overview & Purpose
 
 Most creators and independent professionals rely on generic link-in-bio services that look identical, charge monthly subscriptions for basic customizations, or require technical knowledge to update.
 
-**`pagina-de-links`** turns any AI assistant (in browser chat or terminal) into a patient, step-by-step guide that helps anyone—regardless of technical background—build a custom link-in-bio page matching their personal brand, backed by a private mobile `/admin/` panel and click analytics on Cloudflare Pages + D1 for USD 0/month.
+**`personal-web`** turns any AI assistant (in browser chat, agentic IDEs, or terminal) into a patient, step-by-step guide that helps anyone—regardless of technical background—build a custom personal brand website matching their identity, backed by a private mobile `/admin/` panel and click analytics on Cloudflare Pages + D1 for USD 0/month.
 
 Key elements:
-- **Zero code required:** Works in browser chats (claude.ai, ChatGPT, Gemini) with `PARA-CHAT.md` or in terminal agents (Claude Code, Antigravity, Codex) with `SKILL.md`.
-- **5 Structured Phases:** Design System extraction from Instagram/web, Content & Block hierarchy, Brand JSON generation, Cloudflare Pages + D1 setup, and Daily mobile administration.
-- **Cost USD 0/month:** Fully runs on Cloudflare's free tiers with edge HTML for instant loading (<100ms) and zero tracking cookies.
-- **Template Repository:** [github.com/cgandini/tu-pagina-de-links](https://github.com/cgandini/tu-pagina-de-links)
-- **Interactive Guide & Downloads:** [imagineai.space/recursos/pagina-de-links/](https://imagineai.space/recursos/pagina-de-links/)
+- **Zero code required:** Works in browser chats (claude.ai, ChatGPT, Gemini) with public link fetching or `FOR-CHAT.md`, in agentic IDEs (Antigravity, Cursor, VS Code), or in terminal CLIs (Claude Code, Antigravity, Codex) with `SKILL.md`.
+- **5 Structured Phases:** Design System extraction from Instagram/web, Content & Block hierarchy, Brand JSON generation (`brand/{theme,seed,examples}.json`), Cloudflare Pages + D1 setup, and Daily mobile administration.
+- **Cost USD 0/month:** Fully runs on Cloudflare's free tiers with edge HTML for instant loading (<100ms), D1 SQLite persistence, and zero tracking cookies.
+- **Template Repository:** [github.com/cgandini/personal-web](https://github.com/cgandini/personal-web)
+- **Interactive Guide & Downloads:** [imagineai.space/recursos/personal-web/](https://imagineai.space/recursos/personal-web/)
 
 ### ES · Resumen y Propósito
 
-La mayoría de los creadores y profesionales usan servicios genéricos de enlaces que se ven todos iguales, cobran mensualidades por funciones básicas o requieren editar código a mano cada vez que se quiere actualizar una foto o enlace.
+La mayoría de los creadores y profesionales usan servicios genéricos de enlaces que se ven todos iguales, cobran mensualidades por funciones básicas o requieren editar código a mano cada vez que se quiere actualizar una foto o un enlace.
 
-**`pagina-de-links`** transforma a cualquier asistente de IA en una guía que acompaña paso a paso a cualquier persona (sin conocimientos técnicos de terminal, GitHub ni Cloudflare) a tener su propia página de links con su marca, panel privado `/admin/` en el celular y métricas de clics en Cloudflare Pages + D1 por USD 0/mes.
+**`personal-web`** transforma a cualquier asistente de IA en una guía que te acompaña paso a paso (sin conocimientos técnicos de terminal, GitHub ni Cloudflare) a tener tu propia web personal con tu identidad de marca, panel privado `/admin/` en el celular y analíticas de clics en Cloudflare Pages + D1 por USD 0/mes.
 
-- **5 Fases Deterministas:** Sistema de diseño desde Instagram, contenido por jerarquía de conversión, archivos de marca (`brand/{theme,seed,examples}.json`), instalación en Cloudflare y uso diario desde el teléfono.
-- **Dos caminos de ejecución:**
-  - **Ruta A (Agentes en terminal):** Claude Code, Antigravity o Codex con `SKILL.md` + plantilla pública `cgandini/tu-pagina-de-links`.
-  - **Ruta B (Solo chat en navegador):** claude.ai, ChatGPT o Gemini adjuntando `PARA-CHAT.md` y pegando `PROMPT-PARA-CHAT.md`.
-- **Plantilla pública:** [github.com/cgandini/tu-pagina-de-links](https://github.com/cgandini/tu-pagina-de-links)
+- **5 Fases Deterministas:** Sistema de diseño desde Instagram o tu web, contenido y jerarquía de bloques, archivos de marca (`brand/{theme,seed,examples}.json`), instalación en Cloudflare y uso diario desde el teléfono.
+- **Tres caminos de ejecución:**
+  1. **Camino A (Chat web sin instalar nada):** claude.ai, ChatGPT o Gemini con el prompt de inicio o adjuntando `FOR-CHAT.md`.
+  2. **Camino B (IDE con agentes):** Google Antigravity, Cursor o VS Code con Claude Code o Codex trabajando directo en el repositorio.
+  3. **Camino C (Agentes en terminal):** Claude Code CLI, Antigravity CLI o Codex CLI clonando la plantilla y ejecutando con `SKILL.md`.
+- **Plantilla pública:** [github.com/cgandini/personal-web](https://github.com/cgandini/personal-web)
 
-### Installation / Instalación
+### Usage & Installation / Uso e Instalación
 
+#### 1. Browser Chat (Zero Local Software) / Chat Web (Sin Instalar Nada)
+Copy the kickoff prompt from [imagineai.space/recursos/personal-web/CHAT-PROMPT.md](https://imagineai.space/recursos/personal-web/CHAT-PROMPT.md) and paste it into claude.ai, gemini.google.com, or chatgpt.com.
+If your chat assistant does not fetch external web links, download and attach [`FOR-CHAT.md`](./personal-web/FOR-CHAT.md).
+
+#### 2. Agentic IDEs (Antigravity, Cursor, VS Code + Claude Code / Codex) / IDE con Agentes
+Clone your copy of `https://github.com/cgandini/personal-web` inside your IDE:
+- **Google Antigravity:** Open the cloned workspace and prompt the agent: *"I want to build my personal web using https://github.com/cgandini/personal-web and the personal-web skill. Guide me step by step."* (To install the skill permanently: `cp -R personal-web ~/.agents/skills/personal-web`).
+- **VS Code or Cursor:** Install the **Claude Code** or **Codex** extension, open your cloned personal-web folder, and ask the assistant in the side panel to guide you through Phase 1.
+
+#### 3. Terminal & CLI / Terminal y CLI
 ```bash
 git clone https://github.com/cgandini/agentic-skills.git
 
 # Claude Code
-mkdir -p ~/.claude/skills/pagina-de-links
-cp -R agentic-skills/pagina-de-links/* ~/.claude/skills/pagina-de-links/
+mkdir -p ~/.claude/skills/personal-web
+cp -R agentic-skills/personal-web/* ~/.claude/skills/personal-web/
 
 # Antigravity / Gemini CLI
-mkdir -p ~/.gemini/config/skills/pagina-de-links
-cp -R agentic-skills/pagina-de-links/* ~/.gemini/config/skills/pagina-de-links/
+mkdir -p ~/.gemini/config/skills/personal-web
+cp -R agentic-skills/personal-web/* ~/.gemini/config/skills/personal-web/
 
 # ChatGPT / Codex
-mkdir -p ~/.codex/skills/pagina-de-links
-cp -R agentic-skills/pagina-de-links/* ~/.codex/skills/pagina-de-links/
+mkdir -p ~/.codex/skills/personal-web
+cp -R agentic-skills/personal-web/* ~/.codex/skills/personal-web/
+
+# Clone personal-web template
+gh repo create mi-web --template cgandini/personal-web --private --clone
 ```
 
 Direct raw fetch:
 ```bash
-curl -sO https://imagineai.space/recursos/pagina-de-links/SKILL.md
-curl -sO https://imagineai.space/recursos/pagina-de-links/PARA-CHAT.md
+curl -sO https://imagineai.space/recursos/personal-web/SKILL.md
+curl -sO https://imagineai.space/recursos/personal-web/FOR-CHAT.md
+curl -sO https://imagineai.space/recursos/personal-web/CHAT-PROMPT.md
 ```
 
 ---
@@ -173,21 +197,28 @@ agentic-skills/
 │       ├── subagent.md        # Worker prompt template & contract
 │       ├── verification.md    # Acceptance command criteria
 │       └── worktrees.md       # Git worktree lifecycle management
-└── pagina-de-links/
+└── personal-web/
     ├── SKILL.md               # Main skill specification
-    ├── PARA-CHAT.md           # All-in-one bundle for browser chats
-    ├── PROMPT-PARA-CHAT.md    # Kickoff prompt for browser chats
+    ├── FOR-CHAT.md            # All-in-one bundle for browser chats
+    ├── CHAT-PROMPT.md         # Bilingual kickoff prompt (ES/EN)
     ├── prompts/               # Standalone prompt recipes (1..3)
-    │   ├── 1-sistema-de-diseno.md
-    │   ├── 2-pagina-de-links.md
-    │   └── 3-instalar.md
-    └── references/            # Step-by-step guides (1..6)
-        ├── 1-sistema-de-diseno.md
-        ├── 2-contenido-y-bloques.md
-        ├── 3-archivos-de-marca.md
-        ├── 4-instalar-con-terminal.md
-        ├── 5-instalar-sin-terminal.md
-        └── 6-uso-diario.md
+    │   ├── 1-design-system.md
+    │   ├── 2-static-page.md
+    │   └── 3-install.md
+    ├── references/            # Step-by-step guides (1..6)
+    │   ├── 1-design-system.md
+    │   ├── 2-content-and-blocks.md
+    │   ├── 3-brand-files.md
+    │   ├── 4-install-with-agent.md
+    │   ├── 5-install-from-browser.md
+    │   └── 6-daily-use.md
+    └── examples/              # Fictional brand reference
+        └── sample-brand/
+            ├── README.md
+            ├── design-system.md
+            ├── theme.json
+            ├── seed.json
+            └── examples.json
 ```
 
 ---
