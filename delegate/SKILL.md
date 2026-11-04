@@ -61,7 +61,7 @@ Models are not interchangeable, and you should not spend the most expensive one 
 - **Judgment is bought once.** Understanding the problem, choosing the architecture, naming the helper to reuse, marking the traps and writing the brief all happen at `TIER_JUDGMENT`.
 - **Execution is bought cheap.** Once the brief exists, the decisions are made. A `TIER_WORKER` model with a good brief writes the same code, the same tests and the same refactor as the top model, at a fraction of the cost and latency. Sending a `TIER_JUDGMENT` subagent to type code you already specified is paying twice for the same thinking.
 - **Mechanical questions are bought cheapest.** Yes/no, a path, a version, a count: `TIER_LOOKUP`.
-- **When a subagent does deserve `TIER_JUDGMENT`:** a tier-2 audit (see Audit tiers) or a question that is genuinely architectural. Nothing else.
+- **When a subagent does deserve `TIER_JUDGMENT`:** a tier-2 audit (see Audit tiers), the cold review of a big project's briefs, or a question that is genuinely architectural. Nothing else.
 
 If a `TIER_WORKER` result comes back wrong, the first suspect is the brief, not the model. Fix the brief before you reach for a bigger model.
 
@@ -373,6 +373,8 @@ A trivial closure **does not count** against the 3-loop limit. If a verification
 **Record it** in the delivery: each finding closed this way, the line changed, and the command that proved it. That is the evidence a re-audit would have produced.
 
 **Bump one tier** when the writer's Return flags decisions it made beyond the brief. Those are holes in *your* brief — and on your own brief you are the biased reviewer. A cold reader is the only one who catches a faithfully implemented wrong decision.
+
+**Briefs written by the same session that will judge them are the weakest link.** Before a wave of a big project, have a fresh `TIER_JUDGMENT` agent review the contracts and briefs, without your reasoning, for rules that cannot both hold, decisions a writer would have to invent, and security holes. One round, then fix the briefs: it is cheaper than an escalation mid-wave.
 
 Assign the tier **in the brief**, so the writer knows what it is being held to, and record it in the plan file.
 
