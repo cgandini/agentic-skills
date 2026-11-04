@@ -1,22 +1,22 @@
 ---
 name: delegate
-description: Orchestration pattern for AI coding agents — keep the judgment on the strongest model, delegate everything else by default to cheaper models through self-contained briefs. Works on Claude Code, Antigravity and ChatGPT/Codex; the model for each tier is set in one editable block at the top. Use on any task that involves reading, researching, or writing more than a couple of lines, or when asked to delegate, use subagents, work in parallel, save tokens, manage context, or save the expensive model for judgment. Includes model tiers per AI system, decomposition into units, a named-worktree convention (one per writer), audit tiers by risk, and the context rules — what to keep out, what to write to disk, when to compact. The brief is the deliverable; it must carry what a weaker model would not think of on its own.
+description: Orchestration pattern for AI coding agents — keep the judgment on the strongest model, delegate everything else by default to cheaper models through self-contained briefs. Works on Claude Code, Antigravity, ChatGPT/Codex and MiniMax Code; the model for each tier is set in one editable block at the top. Use on any task that involves reading, researching, or writing more than a couple of lines, or when asked to delegate, use subagents, work in parallel, save tokens, manage context, or save the expensive model for judgment. Includes model tiers per AI system, decomposition into units, a named-worktree convention (one per writer), audit tiers by risk, and the context rules — what to keep out, what to write to disk, when to compact. The brief is the deliverable; it must carry what a weaker model would not think of on its own.
 ---
 
 ## Configuration — edit only this block
 
 ```
-SYSTEM:    auto    # auto | claude | antigravity | codex
+SYSTEM:    auto    # auto | claude | antigravity | codex | minimax
                    # auto = use the system whose subagent tools you actually have
 AUTO_LAND: false   # true  = after every check passes, commit and push without asking
                    # false = stop after verification and ask the user first
 ```
 
-| Tier | What runs on it | Claude Code | Antigravity | ChatGPT / Codex |
-|---|---|---|---|---|
-| `TIER_JUDGMENT` | The main session: judgment, architecture, writing briefs, final verification. Never delegated. | `fable` (`opus` if Fable is not available to you) | `pro` | `gpt-6-astra` |
-| `TIER_WORKER` | Subagents: writing code against a brief, tests, multi-file refactors, research, summaries, audits | `sonnet` | `flash` | `gpt-6.1-sol` |
-| `TIER_LOOKUP` | Subagents: yes/no, a path, a count, a symbol's location, any mechanical check | `haiku` | `flash_lite` | `gpt-6-luna` |
+| Tier | What runs on it | Claude Code | Antigravity | ChatGPT / Codex | MiniMax Code |
+|---|---|---|---|---|---|
+| `TIER_JUDGMENT` | The main session: judgment, architecture, writing briefs, final verification. Never delegated. | `fable` (`opus` if Fable is not available to you) | `pro` | `gpt-6-astra` | `MiniMax-M3` |
+| `TIER_WORKER` | Subagents: writing code against a brief, tests, multi-file refactors, research, summaries, audits | `sonnet` | `flash` | `gpt-6.1-sol` | `MiniMax-M3.1-Flash` |
+| `TIER_LOOKUP` | Subagents: yes/no, a path, a count, a symbol's location, any mechanical check | `haiku` | `flash_lite` | `gpt-6-luna` | `MiniMax-M3.1-Flash` |
 
 **How to read the rest of this file.** Everywhere below, `TIER_JUDGMENT`, `TIER_WORKER` and `TIER_LOOKUP` mean *the model in this table for the active system*. Raw model names appear only here and in "Calling a subagent on each system".
 
@@ -25,7 +25,9 @@ AUTO_LAND: false   # true  = after every check passes, commit and push without a
 - **Claude Code:** `opus`, `sonnet`, `haiku` and `fable` are aliases that always point to the newest version of that family. To pin a version, use a full ID such as `claude-sonnet-5`.
 - **Antigravity:** you choose a *tier*; the platform decides which concrete model version it is today.
 - **ChatGPT / Codex:** these are explicit model IDs. `gpt-6.1-sol` offers near-`gpt-6-astra` performance at lower cost, which is why it is the worker.
+- **MiniMax Code:** these are explicit model IDs. The lineup has two text models, so `MiniMax-M3.1-Flash` fills both `TIER_WORKER` and `TIER_LOOKUP`. A subagent inherits `MiniMax-M3` unless the `task` call names the model — see `references/platforms.md`.
 - Last verified: 2026-10-16 against the official docs — [Claude Code subagents](https://docs.claude.com/en/docs/claude-code/sub-agents), [Claude Code models](https://docs.claude.com/en/docs/claude-code/model-config), [Codex subagents](https://developers.openai.com/codex/subagents), [Codex models](https://developers.openai.com/codex/models).
+- MiniMax Code: read on 2026-11-04 from the [source](https://github.com/MiniMax-AI/minimax-code) and the [model docs](https://platform.minimax.io/docs/guides/models-intro.md). Run on `mcode` 0.7.4: a foreground M3 → M3.1-Flash subagent is confirmed; background waves and worktrees are not.
 
 ---
 

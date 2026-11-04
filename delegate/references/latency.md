@@ -23,7 +23,7 @@ The cost of delegation is not per subagent; it is per **round trip you wait on**
 
 **2. Fire speculatively.** A background lookup you did not end up needing costs almost nothing. A lookup you needed and did not fire costs a full round trip. When in doubt, fire it. Bias toward wide.
 
-**3. Keep an agent warm instead of spawning cold.** When the system lets you message a subagent that is still alive (Claude Code resumes a subagent and keeps its context; Antigravity has `send_message`), a subagent that has already read a module keeps it in context — follow-up questions to *that agent* are warm. Spawn one agent per domain ("the billing module", "the auth flow", "the design tokens") and keep talking to it rather than spawning fresh for each question. The first question pays the cold start; the rest ride on it. When you cannot message a live subagent, fold the follow-ups into the first brief's RETURN — ask for more than you need now.
+**3. Keep an agent warm instead of spawning cold.** When the system lets you message a subagent that is still alive (Claude Code resumes a subagent and keeps its context; Antigravity has `send_message`; MiniMax Code has `task_append`), a subagent that has already read a module keeps it in context — follow-up questions to *that agent* are warm. Spawn one agent per domain ("the billing module", "the auth flow", "the design tokens") and keep talking to it rather than spawning fresh for each question. The first question pays the cold start; the rest ride on it. When you cannot message a live subagent, fold the follow-ups into the first brief's RETURN — ask for more than you need now.
 
 **4. Tier by answer shape, not by importance.**
 
@@ -39,7 +39,7 @@ The cost of delegation is not per subagent; it is per **round trip you wait on**
 
 **6. Verify by sampling, not by redoing.** If checking a result means re-reading everything the subagent read, you paid twice. Two citations spot-checked, the acceptance commands run, the invariants diffed — that is the verification. Reading it all again is not more rigorous; it is the delegation undone.
 
-**7. Use the read-only search agent first.** Every system has a cheap read-only way to search (Claude Code: the built-in `Explore` subagent; Antigravity: a `research`-type subagent; Codex: the built-in `explorer` agent). It reads excerpts rather than whole files and returns conclusions. For "where is / how does / list every" it is faster than a general agent doing the same search. Reach for it first.
+**7. Use the read-only search agent first.** Every system has a cheap read-only way to search (Claude Code: the built-in `Explore` subagent; Antigravity: a `research`-type subagent; Codex: the built-in `explorer` agent; MiniMax Code: the built-in `explore` agent). It reads excerpts rather than whole files and returns conclusions. For "where is / how does / list every" it is faster than a general agent doing the same search. Reach for it first.
 
 What this does not fix: a genuinely serial chain — B needs A's answer, C needs B's — is N round trips no matter what. Recognize those early, and for a short chain in a small codebase, that is the one case where doing the first hop yourself to unblock the wave can be the right call.
 

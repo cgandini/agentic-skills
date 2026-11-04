@@ -71,6 +71,33 @@ If the answer is not in the code, say so and stop.
 """
 ```
 
+### MiniMax Code
+
+- **Per call:** the subagent tool is `task`. It takes `description`, `prompt`, `agent_name`, and optionally `model`, `effort` and `run_in_background`.
+- **Always pass `model`.** Omitted, the subagent inherits `MiniMax-M3` and nothing runs on the cheaper tier. The tool's own description says to set `model` only when the user names one and never to choose one. The tier table in this skill is that choice, made by the user: treat it as naming the model on every call. The value is a source-qualified key, such as `minimax/MiniMax-M3.1-Flash`.
+- **`MiniMax-M3.1-Flash` also needs `effort`.** With `model` and no `effort`, the call fails with "requires an explicit thinking effort". Accepted values: `default`, `low`, `medium`, `high`, `xhigh`, `max`. Pass `default` unless the brief says otherwise.
+- **Check what actually ran** on the first subagent of the session: the `"model"` values in `messages.jsonl`, in that child's folder under `~/.minimax/v2/sessions/`. The `task` result gives its `session_id`. If they say `MiniMax-M3`, stop and tell the user: every tier is running on `MiniMax-M3`.
+- **`model_verdict: missing` says nothing about the model.** That field holds a verdict parsed from the child's reply text, and `missing` is normal when there is none.
+- **A file cannot pin the model.** In a plugin agent's frontmatter `model` is always ignored, and so are `isolation` and `background`. Only the `task` call sets the model.
+- **Roles:** `agent_name` takes `worker` (implementation), `explore` (read-only search), `verifier` (validates, changes no project files: use it for audits) or `mavis` (mixed work).
+- **Parallel means background.** `task` calls run one at a time in the foreground, so use `run_in_background: true` for a wave. There is a concurrency limit; its value is not documented.
+- **Completion:** each call returns a `task_id`. A `<background-task-finished>` event wakes you; read the result with `task_output`. Do not poll. `task_append` sends follow-up work to a child that keeps its context, and `task_stop` ends one.
+- **No worktree per subagent.** Create the named worktree yourself and put its path in the brief, as a hard rule: work only inside this path.
+- **Reasoning:** `MiniMax-M3` starts with thinking off through the API, and its `effort` takes `on` or `off`. Use `on` for a tier-2 audit. `MiniMax-M3.1-Flash` always thinks.
+- **Instructions:** MiniMax Code reads `AGENTS.md`, not `CLAUDE.md`. A rule that tells the session to load this skill must also live there.
+- **Skills:** found in `.minimax/skills`, `.claude/skills` and `.agents/skills` (walking up from the workspace), and in `~/.claude/skills`, `~/.codex/skills` and `~/.agents/skills`.
+
+```
+task(
+  description: "<3-5 words>",
+  agent_name: "worker",
+  model: "minimax/MiniMax-M3.1-Flash",   # TIER_WORKER
+  effort: "default",
+  prompt: "<the brief>",
+  run_in_background: true
+)
+```
+
 ---
 
 ## What to know about subagents (any system)

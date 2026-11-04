@@ -31,15 +31,15 @@ El modelo líder (nivel juicio) permanece liviano: diseña la arquitectura, reda
 
 ---
 
-## 3-Tier × 3-System Architecture / Arquitectura Multi-Plataforma
+## 3-Tier × 4-System Architecture / Arquitectura Multi-Plataforma
 
-The skill works seamlessly across **Claude Code**, **Antigravity**, and **ChatGPT / Codex**, with model mappings defined in a single configuration block:
+The skill works seamlessly across **Claude Code**, **Antigravity**, **ChatGPT / Codex**, and **MiniMax Code**, with model mappings defined in a single configuration block:
 
-| Tier | Role & Responsibility | Claude Code | Antigravity | ChatGPT / Codex |
-|---|---|---|---|---|
-| **Tier 1 — Judgment (Lead)** | Architecture, brief authoring, edge-case discovery, verification, landing | `fable` (or `opus`) | `pro` | `gpt-6-astra` |
-| **Tier 2 — Execution (Worker)** | File edits, running builds, single-phase implementation | `sonnet` | `flash` | `gpt-6.1-sol` |
-| **Tier 3 — Consultation (Research)** | Large read queries, codebase search, broad documentation lookup | `haiku` | `flash_lite` | `gpt-6-mini` |
+| Tier | Role & Responsibility | Claude Code | Antigravity | ChatGPT / Codex | MiniMax Code |
+|---|---|---|---|---|---|
+| **Tier 1 — Judgment (Lead)** | Architecture, brief authoring, edge-case discovery, verification, landing | `fable` (or `opus`) | `pro` | `gpt-6-astra` | `MiniMax-M3` |
+| **Tier 2 — Execution (Worker)** | File edits, running builds, single-phase implementation | `sonnet` | `flash` | `gpt-6.1-sol` | `MiniMax-M3.1-Flash` |
+| **Tier 3 — Consultation (Research)** | Large read queries, codebase search, broad documentation lookup | `haiku` | `flash_lite` | `gpt-6-mini` | `MiniMax-M3.1-Flash` |
 
 ---
 
@@ -92,6 +92,13 @@ cp -R agentic-skills/delegate/* ~/.gemini/config/skills/delegate/
 git clone https://github.com/cgandini/agentic-skills.git
 mkdir -p ~/.codex/skills/delegate
 cp -R agentic-skills/delegate/* ~/.codex/skills/delegate/
+```
+
+### MiniMax Code
+```bash
+git clone https://github.com/cgandini/agentic-skills.git
+mkdir -p ~/.agents/skills/delegate
+cp -R agentic-skills/delegate/* ~/.agents/skills/delegate/
 ```
 
 ### Direct Raw Fetch
