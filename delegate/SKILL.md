@@ -324,7 +324,7 @@ A unit is briefable when one agent can finish it without asking anyone and witho
 
 You verify every unit yourself (above). Whether a *separate* auditor also runs depends on **risk, not size**.
 
-**The auditor is always a fresh agent.** It has no memory of writing the code, no access to your reasoning, and it is told to be adversarial: find what the author missed, and re-verify every claim against the code — never against the brief, the plan or the author's summary. The point is the missing memory, not the model.
+**The first audit is always a fresh agent.** It has no memory of writing the code, no access to your reasoning, and it is told to be adversarial: find what the author missed, and re-verify every claim against the code — never against the brief, the plan or the author's summary. The point is the missing memory, not the model. A re-audit may resume that same auditor, which still never wrote the code — see § Re-audit.
 
 | Tier | What runs | When |
 |---|---|---|
@@ -348,7 +348,7 @@ Defined here and nowhere else.
 
 **Override per project**, stated in `plan.md`. Internal tooling can ship at 70; anything touching money, auth, or PII is tier 2 by definition.
 
-**Fix loop:** when a report misses the bar, fix every 🔴 and 🟠, fix 🟡/💡 in files already touched, re-run Check 0, re-audit. **Maximum 3 loops** — after the third miss the design is wrong, not the patch. Re-plan, log it in the decisions file, reset the counter.
+**Fix loop:** when a report misses the bar, fix every 🔴 and 🟠, fix 🟡/💡 in files already touched, re-run Check 0, re-audit per § Re-audit. **Maximum 3 loops** — after the third miss the design is wrong, not the patch. Re-plan, log it in the decisions file, reset the counter.
 
 ### Trivial-fix closure — when the score is low but the fix is one line
 
@@ -372,6 +372,20 @@ A trivial closure **does not count** against the 3-loop limit. If a verification
 
 **Record it** in the delivery: each finding closed this way, the line changed, and the command that proved it. That is the evidence a re-audit would have produced.
 
+### Re-audit — same auditor, only what changed
+
+A re-audit does not start over. Reading everything again costs the most and finds the least: most of that code has not changed. **Resume the auditor that wrote the report** and send it the diff since that report, as `references/audit.md` § Re-audit describes. It answers three things: is each blocker closed, did the fix introduce anything, what is the updated score.
+
+Keep the auditor's ID when you launch it. Resume it with the system's call: `SendMessage` on Claude Code, `send_message` on Antigravity, `task_append` on MiniMax Code. The fix is never made by the auditor: an agent does not audit its own code.
+
+**When the auditor cannot be resumed,** a fresh one gets its last report and the diff, with the same scope.
+
+**Run a full audit with a fresh agent instead when:**
+- the fix changed the design or a contract, or touched files the auditor did not audit
+- this is the third loop: a resumed auditor is anchored to what it already saw, and by then a cold read is worth the cost
+
+The pass bar does not change, and tier 2 follows the same rule.
+
 **Bump one tier** when the writer's Return flags decisions it made beyond the brief. Those are holes in *your* brief — and on your own brief you are the biased reviewer. A cold reader is the only one who catches a faithfully implemented wrong decision.
 
 **Briefs written by the same session that will judge them are the weakest link.** Before a wave of a big project, have a fresh `TIER_JUDGMENT` agent review the contracts and briefs, without your reasoning, for rules that cannot both hold, decisions a writer would have to invent, and security holes. One round, then fix the briefs: it is cheaper than an escalation mid-wave.
@@ -389,7 +403,7 @@ Assign the tier **in the brief**, so the writer knows what it is being held to, 
 4. **Create a named worktree** per writer; fire the wave in the background. *(`worktrees.md`, `platforms.md`)*
 5. **Keep working** while it runs — next brief, next wave. *(`latency.md`)*
 6. **Verify** each result yourself; read the decisions and blast-radius items first. *(`verification.md`)*
-7. **Audit** at the assigned tier, through a fresh subagent: `subagent.md` + `audit.md` + the handoff — never the brief's decisions. Blockers marked TRIVIAL close per § Trivial-fix closure, not by re-auditing. *(`audit.md`)*
+7. **Audit** at the assigned tier, through a fresh subagent: `subagent.md` + `audit.md` + the handoff — never the brief's decisions. Blockers marked TRIVIAL close per § Trivial-fix closure, not by re-auditing; other fixes go back to the same auditor per § Re-audit. *(`audit.md`)*
 8. **Integrate**, merge, clean up the worktree.
 9. **Land** per `AUTO_LAND`. *(`landing.md`)*
 10. **Report** in your words — never a pasted subagent report.
