@@ -390,6 +390,13 @@ The pass bar does not change, and tier 2 follows the same rule.
 
 **Briefs written by the same session that will judge them are the weakest link.** Before a wave of a big project, have a fresh `TIER_JUDGMENT` agent review the contracts and briefs, without your reasoning, for rules that cannot both hold, decisions a writer would have to invent, and security holes. One round, then fix the briefs: it is cheaper than an escalation mid-wave.
 
+**Suggestions from a tier-2 audit** are improvements, not defects: they never count toward the pass bar. For each one, decide:
+- **Small, and inside files this unit already touches →** apply it now, through the normal writer path, before the unit lands.
+- **Larger, or outside the unit →** log it as known debt in the delivery.
+- **It changes the design or a contract →** take it to the user. Do not apply it on your own.
+
+Name every suggestion and what you decided in the delivery. The auditor proposes; it never applies them.
+
 Assign the tier **in the brief**, so the writer knows what it is being held to, and record it in the plan file.
 
 
